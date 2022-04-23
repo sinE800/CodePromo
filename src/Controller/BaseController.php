@@ -5,28 +5,52 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
+use DateTimeZone;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BaseController extends AbstractController
 {
+    /**
+     * @throws \Exception
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     */
     #[Route('/', name: 'app_base')]
-    public function index(): Response
+    public function index(Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         // just set up a fresh $task object (remove the example data)
-        $task = new User();
+        $user = new User();
 
-        $form = $this->createForm(RegisterType::class, $task);
+        $form = $this->createForm(RegisterType::class, $user);
+        $form->handleRequest($request);
 
 //        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-            $task = $form->getData();
+//            $task = $form->getData();
 
-            // ... perform some action, such as saving the task to the database
+
+            $user->setCode(strtoupper(bin2hex((random_bytes(3))))) ;
+            $user->setCodeActivated("no");
+            $user->setCreationTime( new \DateTime('now', new DateTimeZone('Europe/Paris')));
+            $em->persist($user);
+            $em->flush();
+            $email = (new Email())
+                ->to($user->getMail())
+                //->cc('cc@example.com')
+                //->bcc('bcc@example.com')
+                //->replyTo('fabien@example.com')
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Votre code promo est arrivé !')
+                ->html('<p>See Twig integration for better HTML integration!</p>');
+            $mailer->send($email);
+
 
             return $this->renderForm('base/end.html.twig');
         }
