@@ -5,7 +5,7 @@ body {
     display: grid;
     place-items: center;
     font: 2vw system-ui;
-    background-color: #f9cdad;
+    background-color: #0F3947;
 }
 
 body p {
@@ -30,8 +30,6 @@ body p:after {
     animation: float2 5s ease-in-out infinite;
     content: ".";
     font-weight: bold;
-// -webkit-text-stroke: 0.5px #c8c8a9;
-    -webkit-text-fill-color: #ece5ce;
 // border: 1px solid #c8c8a9;
     text-shadow: 22px 22px #83af9b;
     text-align: left;

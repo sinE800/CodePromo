@@ -1,16 +1,17 @@
 body {
-    background-color: #F9CDAD;
+    background-color: #0F3947;
     /*background: url(../img/background.jpg) center;*/
 
 
+
 }
+
 .form {
-
-margin: 0 auto;
-
+    margin: 0 auto;
+    width: 50vw; height: 50vh;
 }
 .form-floating {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .btn{
     width: 100%;
@@ -37,5 +38,4 @@ margin: 0 auto;
     top:1px;
 }
 
-/* CSS DU END */
 

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\RegisterType;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,14 +42,21 @@ class BaseController extends AbstractController
             $user->setCreationTime( new \DateTime('now', new DateTimeZone('Europe/Paris')));
             $em->persist($user);
             $em->flush();
-            $email = (new Email())
+            $email = (new TemplatedEmail())
                 ->to($user->getMail())
                 //->cc('cc@example.com')
                 //->bcc('bcc@example.com')
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Votre code promo est arrivé !')
-                ->html('<p>See Twig integration for better HTML integration!</p>');
+                ->htmlTemplate('mail/email.html.twig')
+                ->context([
+                    'firstname' =>$user->getFirstname(),
+                    'name' =>$user->getName(),
+                    'mail' =>$user->getMail(),
+                    'code' => $user->getCode(),
+                ]);
+
             $mailer->send($email);
 
 
