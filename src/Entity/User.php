@@ -4,9 +4,16 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+/**
+ * @ORM\Entity
+ * @UniqueEntity("mail",
+ *     message="L'adresse mail est déjà utilisé.")
+ */
+
 class User
 {
     #[ORM\Id]
@@ -14,25 +21,26 @@ class User
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 100)]
     private $name;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 100)]
     private $firstname;
 
-    #[ORM\Column(type: 'string', length: 255, unique: true)]
+
+    #[ORM\Column(type: 'string', length: 100, unique: true)]
     private $mail;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 10)]
     private $code;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 10)]
     private $codeActivated;
 
     #[ORM\Column(type: 'datetime')]
     private $creationTime;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 100)]
     private $Gain;
 
     public function getId(): ?int

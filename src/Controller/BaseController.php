@@ -63,7 +63,7 @@ class BaseController extends AbstractController
                     'code' => $user->getCode(),
                 ]);
 
-//            $mailer->send($email);
+            $mailer->send($email);
 
 
             return $this->renderForm('base/end.html.twig', [
