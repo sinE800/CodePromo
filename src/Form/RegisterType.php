@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -44,16 +45,19 @@ class RegisterType extends AbstractType
                     'class' => 'form-floating',
                 ],
             ])
-            ->add('telephoneNumber', NumberType::class, [
-                "label"=> "Numéro de téléphone",
-                'attr' => [
-                    'placeholder' => 'Numéro de téléphone',
-                    'pattern' => '[0-9]{10}'
-                ],
-                'row_attr' => [
-                    'class' => 'form-floating',
-                ],
-            ])
+//            ->add('gain', HiddenType::class, [
+//                'row_attr' => ['value' => 'hidden', 'id' => 'mydata', 'name' => 'test'],
+//            ])
+//            ->add('telephoneNumber', NumberType::class, [
+//                "label"=> "Numéro de téléphone",
+//                'attr' => [
+//                    'placeholder' => 'Numéro de téléphone',
+//                    'pattern' => '[0-9]{10}'
+//                ],
+//                'row_attr' => [
+//                    'class' => 'form-floating',
+//                ],
+//            ])
 //            ->add('code')
 //            ->add('codeActivated')
 //            ->add('creationTime')

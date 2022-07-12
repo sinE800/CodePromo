@@ -9,6 +9,7 @@ use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -31,15 +32,20 @@ class BaseController extends AbstractController
         $form->handleRequest($request);
 
 //        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
 //            $task = $form->getData();
 
 
-            $user->setCode(strtoupper(bin2hex((random_bytes(3))))) ;
+            $user->setGain($_POST['Gain']);
+
+
+            $user->setCode(strtoupper(bin2hex((random_bytes(3)))));
             $user->setCodeActivated("no");
-            $user->setCreationTime( new \DateTime('now', new DateTimeZone('Europe/Paris')));
+            $user->setCreationTime(new \DateTime('now', new DateTimeZone('Europe/Paris')));
+//            dd($user);
             $em->persist($user);
             $em->flush();
             $email = (new TemplatedEmail())
@@ -51,20 +57,34 @@ class BaseController extends AbstractController
                 ->subject('Votre code promo est arrivé !')
                 ->htmlTemplate('mail/email.html.twig')
                 ->context([
-                    'firstname' =>$user->getFirstname(),
-                    'name' =>$user->getName(),
-                    'mail' =>$user->getMail(),
+                    'firstname' => $user->getFirstname(),
+                    'name' => $user->getName(),
+                    'mail' => $user->getMail(),
                     'code' => $user->getCode(),
                 ]);
 
-            $mailer->send($email);
+//            $mailer->send($email);
 
 
-            return $this->renderForm('base/end.html.twig');
+            return $this->renderForm('base/end.html.twig', [
+                'form' => $form,
+            ]);
         }
+
+
 
         return $this->renderForm('base/index.html.twig', [
             'form' => $form,
         ]);
     }
+
+
+//    #[Route('/', name: 'app_base')]
+//    public function roue(Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
+//    {
+//        return $this->renderForm('base/index.html.twig', [
+//            'form' => $form,
+//        ]);
+//    }
 }
+

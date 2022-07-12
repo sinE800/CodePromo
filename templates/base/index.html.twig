@@ -7,13 +7,54 @@
 
 </style>
 
-<div class=" container-sm form">
-    {{ form_start(form) }}
+        <div class="mainbox" id="mainbox">
+                <div class="box" id="box">
+                        <div class="box1">
+                                <span class="font span1"><b>Samsung Tab A6</b></span>
+                                <span class="font span2"><b>JBL Speaker</b></span>
+                                <span class="font span3"><b>Bon d'achat 10€</b></span>
+                                <span class="font span4"><b>Sepeda Aviator</b></span>
+                                <span class="font span5"
+                                ><b
+                                        >Rice Cooker <br />
+          Philips</b
+                                        ></span
+                                >
+                        </div>
+                        <div class="box2">
+                                <span class="font span1"><b>Lunch Box Lock&Lock</b></span>
+                                <span class="font span2"
+                                ><b
+                                        >Air Cooler <br />
+          Sanken</b
+                                        ></span
+                                >
+                                <span class="font span3"><b>Ipad Mini 4</b></span>
+                                <span class="font span4"><b>Exclusive Gift</b></span>
+                                <span class="font span5"
+                                ><b
+                                        >Electrolux <br />
+          Blender</b
+                                        ></span
+                                >
+                        </div>
+                </div>
 
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary ">Recevoir </button>
+{#                <button type="submit" id="principale" class="spin" onclick="spin()">Recevoir</button>#}
+        </div>
+
+<div class=" container-sm form">
+    {{ form_start(form, {'attr': {'id': 'myForm', 'onsubmit': 'spin()', 'class': 'js-new-rep-log-form'}} ) }}
+
+        {{ form_widget(form, {'attr': {'id': 'input'}}) }}
+{#        <button type="submit" id="principale" class="btn btn-primary" onclick="spin()" >Recevoir </button>#}
+        <input type="hidden" id="Item" name="Gain">
+
+{#    <button type="submit" id="principale" class="btn btn-primary" >Recevoir</button>#}
+        <button type="submit" id="principale" class="btn bn632-hover bn26 ">Recevoir</button>
 
         {{ form_end(form) }}
 
 </div>
+
 {% endblock %}

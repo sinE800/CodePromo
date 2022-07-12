@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
@@ -19,11 +20,8 @@ class User
     #[ORM\Column(type: 'string', length: 255)]
     private $firstname;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     private $mail;
-
-    #[ORM\Column(type: 'integer')]
-    private $telephoneNumber;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $code;
@@ -33,6 +31,9 @@ class User
 
     #[ORM\Column(type: 'datetime')]
     private $creationTime;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $Gain;
 
     public function getId(): ?int
     {
@@ -75,18 +76,6 @@ class User
         return $this;
     }
 
-    public function getTelephoneNumber(): ?int
-    {
-        return $this->telephoneNumber;
-    }
-
-    public function setTelephoneNumber(int $telephoneNumber): self
-    {
-        $this->telephoneNumber = $telephoneNumber;
-
-        return $this;
-    }
-
     public function getCode(): ?string
     {
         return $this->code;
@@ -119,6 +108,18 @@ class User
     public function setCreationTime(\DateTimeInterface $creationTime): self
     {
         $this->creationTime = $creationTime;
+
+        return $this;
+    }
+
+    public function getGain(): ?string
+    {
+        return $this->Gain;
+    }
+
+    public function setGain(string $Gain): self
+    {
+        $this->Gain = $Gain;
 
         return $this;
     }
