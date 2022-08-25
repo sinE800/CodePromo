@@ -39,12 +39,16 @@ class BaseController extends AbstractController
 //            $task = $form->getData();
 
 
+
             $user->setGain($_POST['Gain']);
 
 
             $user->setCode(strtoupper(bin2hex((random_bytes(3)))));
-            $user->setCodeActivated("no");
+
+            $user->setCodeActivated("Non");
+
             $user->setCreationTime(new \DateTime('now', new DateTimeZone('Europe/Paris')));
+
 //            dd($user);
             $em->persist($user);
             $em->flush();
@@ -61,6 +65,7 @@ class BaseController extends AbstractController
                     'name' => $user->getName(),
                     'mail' => $user->getMail(),
                     'code' => $user->getCode(),
+                    'gain' => $user->getGain(),
                 ]);
 
             $mailer->send($email);

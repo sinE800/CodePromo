@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VerifController!{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/styles/VerifStyle.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+{% endblock %}
+
+{% block body %}
+    <style>
+        body {
+            /*background: url("public/assets/img/background.jpg");*/
+
+            background-color: #0F3947;
+            color: #f6f6f6;
+            text-align: center;
+            font-size: 4vh;
+        }
+
+        p h5 {
+        }
+    </style>
+
+
+    <div class="container" style="padding: 100px;">
+        {% if user.codeActivated == 'Oui' %}
+            Le code {{ user.code }} a bien été utilisé.
+        {% elseif user.codeActivated == 'Non' %}
+            Le code {{ user.code }} a déjà été utilisé.
+        {% endif %}
+        <br>
+        <a href="{{ path('app_verif') }}">
+            <button class="btn btn-primary ">Revenir a la page d'accueil</button>
+        </a>
+
+    </div>
+
+
+
+
+    {# <div class="container"> #}
+    {#    <p> #}
+
+    {#        {{ user.code }} #}
+    {#        {{ user.code }} #}
+
+    {#    </p> #}
+    {# </div> #}
+
+
+{% endblock %}
+

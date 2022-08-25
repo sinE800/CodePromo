@@ -14,13 +14,13 @@ function shuffle(array) {
   let currentIndex = array.length,
       randomIndex;
 
-  // While there remain elements to shuffle...
+  // Tant qu'il reste des éléments à brasser
   while (0 !== currentIndex) {
-    // Pick a remaining element...
+    // Choisi l'élément restant
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
-
-    // And swap it with the current element.
+    console.log(randomIndex);
+    // échange avec l'élément actuel.
     [array[currentIndex], array[randomIndex]] = [
       array[randomIndex],
       array[currentIndex],
@@ -49,7 +49,7 @@ function spin() {
   //   alert("hello");
   // },10000);
 
-  // Inisialisasi variabel
+  // Initialisation de variable
   const box = document.getElementById("box");
   const element = document.getElementById("mainbox");
   const form = document.querySelector("#myForm");
@@ -66,37 +66,35 @@ function spin() {
   // }
   // codeProbablementBogue()
 
-  // Shuffle 450 karena class box1 sudah ditambah 90 derajat diawal. minus 40 per item agar posisi panah pas ditengah.
-  // Setiap item memiliki 12.5% kemenangan kecuali item sepeda yang hanya memiliki sekitar 4% peluang untuk menang.
-  // Item berupa ipad dan samsung tab tidak akan pernah menang.
-  // let Sepeda = shuffle([2210]); //Kemungkinan : 33% atau 1/3
-  let BonAchat10 = shuffle([1890, 2250, 2610]);
-  let Sepeda = shuffle([1850, 2210, 2570]); //Kemungkinan : 100%
-  let RiceCooker = shuffle([1810, 2170, 2530]);
-  let LunchBox = shuffle([1770, 2130, 2490]);
-  let Sanken = shuffle([1750, 2110, 2470]);
-  let Electrolux = shuffle([1630, 1990, 2350]);
-  let JblSpeaker = shuffle([1570, 1930, 2290]);
+  //
+  // Chaque article a un gain de 12,5%
+  let BonAchat10 = shuffle([1890]);
+  let BonAchat15 = shuffle([1850]);
+  let Remise15 = shuffle([1810]);
+  let Remise10 = shuffle([1770]);
+  let BonAchat5 = shuffle([1750]);
+  let Remise5 = shuffle([1630]);
+  let Remise20 = shuffle([1570]);
 
-  // Bentuk acak
+  // Forme aléatoire
   let Hasil = shuffle([
     BonAchat10[0],
-    Sepeda[0],
-    RiceCooker[0],
-    LunchBox[0],
-    Sanken[0],
-    Electrolux[0],
-    JblSpeaker[0],
+    BonAchat15[0],
+    Remise15[0],
+    Remise10[0],
+    BonAchat5[0],
+    Remise5[0],
+    Remise20[0],
   ]);
 
-  // Ambil value item yang terpilih
-  if (BonAchat10.includes(Hasil[0])) SelectedItem = "Bon d'achat 10€";
-  if (Sepeda.includes(Hasil[0])) SelectedItem = "Sepeda Aviator";
-  if (RiceCooker.includes(Hasil[0])) SelectedItem = "Rice Cooker Philips";
-  if (LunchBox.includes(Hasil[0])) SelectedItem = "Lunch Box Lock&Lock";
-  if (Sanken.includes(Hasil[0])) SelectedItem = "Air Cooler Sanken";
-  if (Electrolux.includes(Hasil[0])) SelectedItem = "Electrolux Blender";
-  if (JblSpeaker.includes(Hasil[0])) SelectedItem = "JBL Speaker";
+  // Prend la valeur de l'élément sélectionné
+  if (BonAchat10.includes(Hasil[0])) SelectedItem = "Bon de 10€";
+  if (BonAchat15.includes(Hasil[0])) SelectedItem = "Bon de 15€";
+  if (Remise15.includes(Hasil[0])) SelectedItem = "Remise de 15%";
+  if (Remise10.includes(Hasil[0])) SelectedItem = "Remise de 10%";
+  if (BonAchat5.includes(Hasil[0])) SelectedItem = "Bon de 5€";
+  if (Remise5.includes(Hasil[0])) SelectedItem = "Remise de 5%";
+  if (Remise20.includes(Hasil[0])) SelectedItem = "Remise de 20%";
 
   // Proses
   box.style.setProperty("transition", "all ease 5s");
@@ -105,25 +103,20 @@ function spin() {
   setTimeout(function () {
     element.classList.add("animate");
   }, 5000);
+
   $("#Item").val(SelectedItem);
 
 
 
 
 
-  // Munculkan Alert
+  // Alert
   setTimeout(function () {
-    // applause.play();
-
-
-
-
-
     swal({
       title: "Félicitations",
-      text: "Vous avez gagné : " + SelectedItem  ,
+      text: "Vous avez gagné : " + SelectedItem,
       icon: "success",
-      button: 'Recevoir',
+      button: 'Recevoir le code par mail',
     }).then(function() {
 
       form.submit();
@@ -137,6 +130,8 @@ function spin() {
   }, 10000000);
 
   $('.btn').attr('disabled', true );
+
+
   // $('#principale').attr(['disabled', true, 'type', 'submit']);
 
 
